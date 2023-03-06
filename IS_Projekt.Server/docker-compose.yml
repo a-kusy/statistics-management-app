@@ -1,0 +1,22 @@
+﻿version: '3.8'
+
+services:
+  app:
+    container_name:  isprojekt_server
+    ports: 
+      - "5229:80"
+    depends_on:
+      - db
+    image: houtarouoreki/isprojektserver:latest
+
+  db:
+    container_name: isprojekt_mysql
+    ports: 
+      - "3306:3306"
+    command: --default-authentication-plugin=mysql_native_password
+    environment:
+      MYSQL_ALLOW_EMPTY_PASSWORD: yes
+      MYSQL_DATABASE: accidentstatistics
+    image: mysql
+volumes:
+  dbdata:
